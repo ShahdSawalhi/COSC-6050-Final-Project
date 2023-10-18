@@ -10,14 +10,87 @@
             margin: 0;
             padding: 0;
         }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
     <h2>Predictive Policing</h2>
-    <!-- Add content related to predictive policing here -->
+
+    <!-- Keep the crime type filter and replace the text input field with a dropdown menu -->
+    <form>
+        <label for="crime_type_filter">Filter by Crime Type:</label>
+        <select id="crime_type_filter" onchange="filterTable()">
+            <option value="all">All</option>
+            <option value="Arson">Arson</option>
+            <option value="AssaultOffense">Assault Offense</option>
+            <option value="Burglary">Burglary</option>
+            <option value="CriminalDamage">CriminalDamage</option>
+            <option value="Homicide">Homicide</option>
+            <option value="LockedVehicle">LockedVehicle</option>
+            <option value="Robbery">Robbery</option>
+            <option value="SexOffense">SexOffense</option>
+            <option value="Theft">Theft</option>
+            <option value="VehicleTheft">VehicleTheft</option>
+            <!-- Add more options for other crime types -->
+        </select>
+    </form>
+
+    <!-- Display the table without a button -->
+    <div id="display_statistic">
+        <!-- Check if statistic_data is not None (i.e., data is available) -->
+        {% if statistic_data %}
+        <table id="crime_table">
+            <tr>
+                <th>Crime Type</th>
+                <th>Frequency</th>
+            </tr>
+            {% for crime_statistic in statistic_data.items() %}
+            <tr>
+                <td>{{ crime_statistic[0] }}</td>
+                <td>{{ crime_statistic[1]['Total'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <!-- End of statistic_data check -->
+    </div>
 
     <a href="/">Back to Home</a> {# Add a link to navigate back to the homepage #}
 
-    <!-- Include any necessary JavaScript scripts here -->
+    <!-- Include JavaScript to filter the table -->
+    <script>
+        function filterTable() {
+            var selectedCrimeType = document.getElementById("crime_type_filter").value;
+            var table = document.getElementById("crime_table");
+            var rows = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < rows.length; i++) {  // Start from 1 to skip the header row
+                var row = rows[i];
+                var crimeType = row.cells[0].textContent;
+
+                if (selectedCrimeType === "all" || crimeType === selectedCrimeType) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
+
+
+
+
