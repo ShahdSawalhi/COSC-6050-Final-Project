@@ -9,15 +9,11 @@ from flask import Flask, render_template, request
 import csv
 import pandas as pd
 from geopy.geocoders import Nominatim
-
-app = Flask(__name__)
-
+app = Flask(__name__, template_folder="templates")
 # Load data from the CSV file into a Pandas DataFrame
 data = pd.read_csv('wibr.csv')
-
 # Rename the columns to match the template
 data.rename(columns={'RoughX': 'latitude', 'RoughY': 'longitude'}, inplace=True)
-
 # Convert DataFrame to a list of dictionaries
 crime_data = data.to_dict(orient='records')
 
@@ -64,7 +60,6 @@ def fetch_crime_type_data():
 @app.route('/')
 def index():
     return render_template('layout.html')  # Render the index.html template
-
 @app.route('/crime_map')
 def crime_map():
     return render_template('crime_map.html', crime_data=crime_data)  # Render the crime_map.html template
@@ -89,9 +84,12 @@ def predictive_policing():
     # Ensure you return a valid response in all cases
     return render_template('predictive_policing.html', statistic_data=statistic_data)
 
+@app.route('/resources')
+def resources():
+    return render_template('resources.html')
 
 
 if __name__ == '__main__':
     app.run(port=5050, debug=True)
 
-#Testing PyCharm push-pull -Patricia
+    # Testing PyCharm push-pull -Patricia

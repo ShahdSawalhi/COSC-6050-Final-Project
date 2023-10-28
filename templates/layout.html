@@ -2,35 +2,85 @@
 <html>
 <head>
     <title>Crime Analytics System</title>
-    <!-- Include any necessary CSS stylesheets and JavaScript libraries here -->
+    <!-- Internal CSS styles -->
+    <style>
+        /* Header styles */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .nav {
+            margin: 20px 0;
+        }
+
+        .nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        /* Main content styles */
+        .content {
+            padding: 20px;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Header Section -->
-    <header>
-        <h1>Crime Analytics System</h1>
-        <nav>
+    <header class="header">
+        <h1 class="logo">Crime Analytics System</h1>
+        <nav class="nav">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/crime_map">Crime Map</a></li>
                 <li><a href="/predictive_policing">Predictive Policing</a></li>
+                <li><a href="/resources">Resources</a></li>  <!-- Adjusted placement for the "Resources" link -->
                 <!-- Add more navigation links as needed -->
             </ul>
         </nav>
     </header>
 
     <!-- Main Content Section -->
-    <main>
+    <main class="content">
         <!-- This is where the content of individual pages will be displayed -->
         {% block content %}{% endblock %}
     </main>
 
     <!-- Footer Section -->
-    <footer>
+    <footer class="footer">
         &copy; 2023 Crime Analytics System.
     </footer>
 
     <!-- Include any necessary JavaScript scripts here -->
 </body>
 </html>
+
 
 

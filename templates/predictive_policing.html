@@ -48,24 +48,28 @@
     </form>
 
     <!-- Display the table without a button -->
-    <div id="display_statistic">
-        <!-- Check if statistic_data is not None (i.e., data is available) -->
-        {% if statistic_data %}
-        <table id="crime_table">
+<div id="display_statistic">
+    <!-- Check if statistic_data is not None (i.e., data is available) -->
+    {% if statistic_data %}
+    <table id="crime_table">
+        <thead>
             <tr>
                 <th>Crime Type</th>
                 <th>Frequency</th>
             </tr>
-            {% for crime_statistic in statistic_data.items() %}
+        </thead>
+        <tbody>
+            {% for crime_type, statistics in statistic_data.items() %}
             <tr>
-                <td>{{ crime_statistic[0] }}</td>
-                <td>{{ crime_statistic[1]['Total'] }}</td>
+                <td>{{ crime_type }}</td>
+                <td>{{ statistics['Total'] }}</td>
             </tr>
             {% endfor %}
-        </table>
-        {% endif %}
-        <!-- End of statistic_data check -->
-    </div>
+        </tbody>
+    </table>
+    {% endif %}
+    <!-- End of statistic_data check -->
+</div>
 
     <a href="/">Back to Home</a> {# Add a link to navigate back to the homepage #}
 
@@ -90,7 +94,6 @@
     </script>
 </body>
 </html>
-
 
 
 
