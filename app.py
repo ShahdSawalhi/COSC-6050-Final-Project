@@ -9,7 +9,9 @@ from flask import Flask, render_template, request
 import csv
 import pandas as pd
 
-app = Flask(__name__, template_folder="templates")
+
+
+app = Flask(__name__, template_folder="templates" , static_folder="Static")
 # Load data from the CSV file into a Pandas DataFrame
 data = pd.read_csv('wibr.csv')
 # Rename the columns to match the template
