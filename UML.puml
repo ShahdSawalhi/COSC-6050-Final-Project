@@ -1,0 +1,61 @@
+@startuml
+
+class CrimeMapApp {
+  + app: Flask
+  + data: DataFrame
+  + crime_data: List[Dict]
+  --
+  + fetch_crime_frequency_data(): List[Dict]
+  + fetch_crime_type_data(): Dict[str, Dict]
+}
+
+class CrimeDataAnalyzer {
+  --
+  + fetch_crime_frequency_data(): List[Dict]
+  + fetch_crime_type_data(): Dict[str, Dict]
+}
+
+class LayoutPage {
+  + layout_html: HTMLPage
+}
+
+class CrimeMapPage {
+  + crime_map_js: JSFile
+  + crime_map_css: CSSFile
+}
+
+class PredictivePolicingPage {
+  --
+  + selected_statistic: str
+  + statistic_data: Any
+}
+
+class ResourcesPage {
+  + resources_html: HTMLPage
+}
+
+class HTMLPage {
+  + template_file: str
+}
+
+class CSSFile {
+  + filename: str
+}
+
+class JSFile {
+  + filename: str
+}
+
+CrimeMapApp --|> CrimeDataAnalyzer
+CrimeMapApp --|> LayoutPage
+
+LayoutPage --|> HTMLPage
+
+HTMLPage --|> CrimeMapPage
+HTMLPage --|> PredictivePolicingPage
+HTMLPage --|> ResourcesPage
+
+CrimeMapPage --|> JSFile
+CrimeMapPage --|> CSSFile
+
+@enduml
