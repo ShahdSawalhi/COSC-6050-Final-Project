@@ -8,7 +8,7 @@ Each page will have an HTML/CSS file to deal with the style and content of the p
 from flask import Flask, render_template, request
 import csv
 import pandas as pd
-from geopy.geocoders import Nominatim
+
 app = Flask(__name__, template_folder="templates")
 # Load data from the CSV file into a Pandas DataFrame
 data = pd.read_csv('wibr.csv')
@@ -62,7 +62,7 @@ def index():
     return render_template('layout.html')  # Render the index.html template
 @app.route('/crime_map')
 def crime_map():
-    return render_template('crime_map.html', crime_data=crime_data)  # Render the crime_map.html template
+    return render_template('crime_map.html')  # Render the crime_map.html template
 
 
 @app.route('/predictive_policing', methods=['GET', 'POST'])
