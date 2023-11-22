@@ -6,14 +6,21 @@
     <style>
         /* Body styles */
         body {
-            background-color: #fff; /* White background color */
-            color: #333; /* Text color */
-            font-family: Arial, sans-serif; /* Font style */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('/Static/milwaukeeSkyline.jpeg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #000; /* Text color set to black */
         }
 
         /* Header styles */
         .header {
-            background-color: #0074e4; /* Blue header background color */
+            background-color: #0074e4;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -28,6 +35,8 @@
         .nav {
             margin: 20px 0;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .nav ul {
@@ -45,27 +54,53 @@
             color: #fff;
             font-size: 18px;
             display: inline-block;
-            padding: 12px 24px; /* Adjust button padding as needed */
-            background-color: #0074e4; /* Blue button background color */
+            padding: 12px 24px;
+            background-color: #0074e4;
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
 
         .nav ul li a:hover {
-            background-color: #333; /* Grey button background color on hover */
+            background-color: #333;
         }
 
         /* Main content styles */
         .content {
             padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .welcome-message {
+            font-size: 30px;
+            margin-bottom: 20px;
+            background-color: rgba(128, 128, 128, 0.5); /* Grey opaque box */
+            border-radius: 10px; /* Rounded corners */
+            padding: 5px; /* Padding for the text box */
+            display: block; /* Set to block element */
+            width: 70%; /* Adjust the width as needed */
+            margin: 0 auto; /* Center horizontally */
+        }
+        .description {
+            font-size: 22px;
+            margin-bottom: 20px;
+            background-color: rgba(128, 128, 128, 0.5); /* Grey opaque box */
+            border-radius: 10px; /* Rounded corners */
+            padding: 5px; /* Padding for the text box */
+            display: block; /* Set to block element */
+            width: 70%; /* Adjust the width as needed */
+            margin: 0 auto; /* Center horizontally */
         }
 
         /* Footer styles */
         .footer {
-            background-color: #0074e4; /* Blue footer background color */
+            background-color: #0074e4;
             color: #fff;
             text-align: center;
             padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -77,6 +112,12 @@
 
     <!-- Main Content Section -->
     <main class="content">
+        <div class="welcome-message">
+            Welcome to the Milwaukee Crime Analytics System Page
+        </div>
+        <div class="description">
+            Explore the different Milwaukee neighborhoods' safety through and interactive map and the different crime statistics
+        </div>
         <!-- This is where the content of individual pages will be displayed -->
         {% block content %}{% endblock %}
     </main>
@@ -100,6 +141,12 @@
     <!-- Include any necessary JavaScript scripts here -->
 </body>
 </html>
+
+
+
+
+
+
 
 
 
