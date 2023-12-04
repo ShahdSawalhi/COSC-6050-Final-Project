@@ -1,6 +1,6 @@
-/* 
+/*
  * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
+ * that contains the map.
  */
 
 body {
@@ -19,16 +19,13 @@ body {
 
 
 
-
-
-
 #legend {
   margin-top: 20px; /* Adjust margin as needed */
   margin-right: 20px; /* Adjust the margin to move the legend to the left from the right */
   position: absolute;
   height: auto;
   width: auto;
-  border: 2px solid #040303; 
+  border: 2px solid #040303;
 }
 
 .legend-item {
@@ -43,7 +40,7 @@ body {
 .circle {
   width: 20px;
   height: 20px;
-  border-radius: 50%; 
+  border-radius: 50%;
   margin-right: 5px;
   margin-left: 5px;
   box-sizing: content-box;
@@ -54,18 +51,5 @@ body {
   font-weight: bold;
 }
 
-/* .title {
-  font-weight: bold;
-  margin-left: 25px;
-  margin-bottom: 10px;
-  margin-top: 8px;
-  font-size: 14px;
-}
 
-
-.title-container {
-  border-bottom: 2px solid #000000; /* Add a bottom border to the title container */
-  /* padding: 5px; Add padding to the title container */
-  /* background-color: cadetblue;
-} */ 
 

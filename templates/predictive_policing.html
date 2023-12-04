@@ -1,51 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Predictive Policing</title>
     <!-- Internal CSS styles -->
     <style>
-        /* Body styles */
         body {
-            background-color: #fff; /* White background color */
-            color: #333; /* Text color */
-            font-family: Arial, sans-serif; /* Font style */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
 
-        /* Header styles */
-        .header {
-            background-color: #0074e4; /* Blue header background color */
+        header {
+            background-color: #0074e4;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
+            padding: 20px 0;
         }
 
-        .logo {
-            font-size: 36px;
+        header h1 {
             margin: 0;
+            font-size: 28px;
         }
 
-        /* Main content styles */
-        .content {
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
             padding: 20px;
-        }
-
-        /* Button styles */
-        .button {
-            background-color: #0074e4; /* Blue button background color */
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            display: inline-block;
-            padding: 12px 24px; /* Adjust button padding as needed */
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .button:hover {
-            background-color: #333; /* Grey button background color on hover */
+        h2 {
+            color: #0074e4;
         }
 
-        /* Additional styles specific to this page */
         form {
             text-align: center;
             margin: 20px 0;
@@ -63,56 +55,77 @@
         }
 
         table {
+            width: 100%;
             border-collapse: collapse;
-            width: 80%;
-            margin: 20px auto;
+            margin-top: 20px;
         }
 
         th, td {
             border: 1px solid #ddd;
             text-align: left;
-            padding: 8px;
+            padding: 12px;
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #0074e4;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .button {
+            background-color: #0074e4;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #00549a;
         }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    <header class="header">
-        <h1 class="logo">Crime Analytics System</h1>
+    <header>
+        <h1>Crime Analytics System</h1>
     </header>
 
     <!-- Main Content Section -->
-    <main class="content">
+    <main>
         <h2>Predictive Policing</h2>
 
-        <!-- Keep the crime type filter and replace the text input field with a dropdown menu -->
-        <form>
+        <!-- Crime type filter form -->
+        <form method="post">
             <label for="crime_type_filter">Filter by Crime Type:</label>
-            <select id="crime_type_filter" onchange="filterTable()">
+            <select id="crime_type_filter" name="crime_type_filter" onchange="this.form.submit()">
                 <option value="all">All</option>
                 <option value="Arson">Arson</option>
-                <option value="AssaultOffense">Assault Offense</option>
+                <option value="Assault">Assault</option>
                 <option value="Burglary">Burglary</option>
-                <option value="CriminalDamage">CriminalDamage</option>
+                <option value="CriminalDamage">Criminal Damage</option>
                 <option value="Homicide">Homicide</option>
-                <option value="LockedVehicle">LockedVehicle</option>
                 <option value="Robbery">Robbery</option>
-                <option value="SexOffense">SexOffense</option>
+                <option value="SexOffense">Sex Offense</option>
                 <option value="Theft">Theft</option>
-                <option value="VehicleTheft">VehicleTheft</option>
+                <option value="VehicleTheft">Vehicle Theft</option>
                 <!-- Add more options for other crime types -->
             </select>
         </form>
 
-        <!-- Display the table without a button -->
+        <!-- Display crime statistics table -->
         <div id="display_statistic">
             <!-- Check if statistic_data is not None (i.e., data is available) -->
             {% if statistic_data %}
-            <table id="crime_table">
+            <table>
                 <thead>
                     <tr>
                         <th>Crime Type</th>
@@ -132,7 +145,14 @@
             <!-- End of statistic_data check -->
         </div>
 
-        <a class="button" href="/">Back to Home</a> {# Use the button style for the link #}
+        <!-- Display the graph -->
+        {% if graph_image %}
+            <img src="data:image/png;base64,{{ graph_image }}" alt="Crime Frequencies Over Months" />
+        {% endif %}
+        </div>
+
+        <!-- Back to Home button -->
+        <a class="button" href="/">Back to Home</a>
     </main>
 
     <!-- Include JavaScript to filter the table -->
@@ -149,14 +169,10 @@
                 if (selectedCrimeType === "all" || crimeType === selectedCrimeType) {
                     row.style.display = "";
                 } else {
-                    row.style display = "none";
+                    row.style.display = "none";
                 }
             }
         }
     </script>
 </body>
 </html>
-
-
-
-

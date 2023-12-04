@@ -11,6 +11,7 @@ import pandas as pd
 
 
 
+
 app = Flask(__name__, template_folder="templates" , static_folder="Static")
 # Load data from the CSV file into a Pandas DataFrame
 data = pd.read_csv('wibr.csv')
@@ -23,10 +24,8 @@ crime_data = data.to_dict(orient='records')
 def fetch_crime_frequency_data():
     data = pd.read_csv('wibr.csv')
 
-    # Create a list of columns that represent different crime types
-    crime_type_columns = ["Arson", "AssaultOffense", "Burglary", "CriminalDamage",
-                          "Homicide", "LockedVehicle", "Robbery", "SexOffense",
-                          "Theft", "VehicleTheft"]
+    # Update the column names
+    crime_type_columns = ['Arson', 'Assault', 'Burglary', 'CriminalDamage', 'Homicide', 'Robbery', 'SexOffense', 'Theft', 'VehicleTheft']
 
     # Calculate the frequency of each crime type
     crime_frequency = data[crime_type_columns].sum().reset_index()
@@ -40,10 +39,8 @@ def fetch_crime_frequency_data():
 def fetch_crime_type_data():
     data = pd.read_csv('wibr.csv')
 
-    # Create a list of columns that represent different crime types
-    crime_type_columns = ["Arson", "AssaultOffense", "Burglary", "CriminalDamage",
-                          "Homicide", "LockedVehicle", "Robbery", "SexOffense",
-                          "Theft", "VehicleTheft"]
+    # Update the column names
+    crime_type_columns = ['Arson', 'Assault', 'Burglary', 'CriminalDamage', 'Homicide', 'Robbery', 'SexOffense', 'Theft', 'VehicleTheft']
 
     # Create an empty dictionary to store statistics for each crime type
     crime_type_statistics = {}
@@ -59,6 +56,8 @@ def fetch_crime_type_data():
 
     return crime_type_statistics
 
+
+
 @app.route('/')
 def index():
     return render_template('layout.html')  # Render the index.html template
@@ -69,22 +68,25 @@ def crime_map():
 
 @app.route('/predictive_policing', methods=['GET', 'POST'])
 def predictive_policing():
-    selected_statistic = request.form.get('selected_statistic')
-    statistic_data = None  # Default value
+    # Fetch crime frequency data
+    crime_frequency_data = fetch_crime_frequency_data()
 
-    # Implement logic to fetch the selected statistic from the 'wibr.csv' dataset
-    if selected_statistic == 'crime_type':
-        # Fetch and process data for crime types
-        statistic_data = fetch_crime_type_data()
-    elif selected_statistic == 'crime_frequency':
-        # Fetch and process data for crime frequency
-        statistic_data = fetch_crime_frequency_data()
-    #else:
-        # Handle other statistic options
-        # You can add logic here to handle other options or provide a default response
+    # Fetch crime type statistics
+    crime_type_statistics = fetch_crime_type_data()
 
-    # Ensure you return a valid response in all cases
-    return render_template('predictive_policing.html', statistic_data=statistic_data)
+    # Combine both datasets into a single dictionary
+    crime_data = {crime['Crime_Type']: {'Total': crime['Frequency']} for crime in crime_frequency_data}
+
+    if request.method == 'POST':
+        selected_crime_type = request.form.get('crime_type_filter')
+        selected_crime_data = {selected_crime_type: crime_type_statistics.get(selected_crime_type, {})}
+        return render_template('predictive_policing.html', statistic_data=selected_crime_data)
+
+    # Render the initial page with all crime data
+    return render_template('predictive_policing.html', statistic_data=crime_data)
+
+
+
 
 @app.route('/resources')
 def resources():
@@ -94,4 +96,5 @@ def resources():
 if __name__ == '__main__':
     app.run(port=5050, debug=True)
 
-    # testing-pn
+
+##Testing 2-PM
